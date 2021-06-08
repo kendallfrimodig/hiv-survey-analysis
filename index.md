@@ -1,14 +1,13 @@
 ---
 title: "Survey Analysis of HIV Medication Preference Data Set"
 author: "Kendall Frimodig"
-date: "Summer 2018"
 output: github_document
 ---
 
 	%macro import;
-		proc import datafile="&folder\tupp2.csv" 
-		out=TUPP dbms=csv replace; 
-		getnames=yes; 
+		proc import datafile="&folder\tupp2.csv"
+		out=TUPP dbms=csv replace;
+		getnames=yes;
 		run;
 	%mend import;
 
@@ -17,11 +16,11 @@ Rename variables, convert multivariable information (PID) into seperate variable
 string to numeric conversions, age acalculations
 *********************************************************************************************;
 	%import;
-DATA TUPP 
-	(drop= 	INTTIME 
-			PIDtemp 
-			PID 
-			INTEND 
+DATA TUPP
+	(drop= 	INTTIME
+			PIDtemp
+			PID
+			INTEND
 
 	 rename=(	DEM1=	sex
 				DEM3=	language10
@@ -55,7 +54,7 @@ SET TUPP;
 
 	if dem2 =. then delete;
 
-		else if dem2 > 102000 and dem2 < 120219978 then do; 
+		else if dem2 > 102000 and dem2 < 120219978 then do;
 			bday 	= SUBSTR(birthdate,1,2);
 			bmonth  = SUBSTR(birthdate,3,2);
 			byear 	= SUBSTR(birthdate,5,4);
@@ -92,22 +91,22 @@ SET TUPP;
 		intyear  = SUBSTR(interviewdate,5,4);
 		end;
 
-	
+
 
 	if ID >= 652 and ID <= 661 then delete;
 run;
 
 
-DATA TUPP 
-	(drop= 	PIDfull bday byear bmonth  PIDc GROUP_IDC NAIVE_IDC 
-			INTTIME2 INTEND2 interviewdate birthdate dem2 
+DATA TUPP
+	(drop= 	PIDfull bday byear bmonth  PIDc GROUP_IDC NAIVE_IDC
+			INTTIME2 INTEND2 interviewdate birthdate dem2
 			intdate ID intday intmonth intyear					);
 SET TUPP;
 
 	PID 		= INPUT(PIDc,4.);
 	GROUP 		= INPUT(Group_IDC,1.);
 	NAIVE 		= INPUT(Naive_IDC,1.);
-		
+
 	INTTIME		= INPUT(INTTIME2,4.);
 	INTEND 		= INPUT(INTEND2,4.);
 
@@ -158,7 +157,7 @@ run;
 Label variables, convert -66 to 0, calculate a precise age from year, month, and day
 
 	~~~~idea~~~~
-	Idea to automate this process.. run an array of all variables, make a delimited file or 
+	Idea to automate this process.. run an array of all variables, make a delimited file or
 	string variable containing all of the labels, and for each iteration (i) the variable is increased
 	and the SCAN(list, i) would be used to fetch the label without having to one by one
 	do the GKH8= 'heard of aids'and then having to repeat all that code in the subsequent sections.
@@ -284,12 +283,12 @@ SET TUPP;
 			AAF39d	= 'partner support'
 			AAF39e	= 'missing'
 			AAF39f	= 'dont know, not sure'
-			AAF39g	= 'other' 
-			AAF40a	= 'being judged about having sex' 
+			AAF39g	= 'other'
+			AAF40a	= 'being judged about having sex'
 			AAF40b	= 'being seen as having HIV'
-			AAF40c	= 'forgetting' 
+			AAF40c	= 'forgetting'
 			AAF40d	= 'no support'
-			AAF40e	= 'lack of information' 
+			AAF40e	= 'lack of information'
 			AAF40f	= 'other'
 			AAF41	= 'preffer site of obtainment'
 			AAF42a	= 'free'
@@ -300,9 +299,9 @@ SET TUPP;
 			AAF42f	= 'anonymity'
 			AAF42g	= 'special skills'
 			AAF42h	= 'other'
-			AAF43	= 'venue not preffered' 
+			AAF43	= 'venue not preffered'
 			AAF44a	= 'judgmental'
-			AAF44b	= 'being seen as having HIV' 
+			AAF44b	= 'being seen as having HIV'
 			AAF44c	= 'Long hours/ques'
 			AAF44d	= 'rude personnel'
 			AAF44e	= 'not free'
@@ -355,11 +354,11 @@ PROC FORMAT;
 								1='Adolescents'
 								2='Adults'
 								3='MSM';
-		VALUE 	languagetwo 
+		VALUE 	languagetwo
 								0='Other'
 								1='Xhosa';
 
-		VALUE 	languageten 
+		VALUE 	languageten
 								1='Xhosa'
 								2='Zulu'
 								3='Swati'
@@ -379,20 +378,20 @@ PROC FORMAT;
 								4='Pensions and grants'
 								77='Other'
 								88='Missing';
-		VALUE 	residence_length 
+		VALUE 	residence_length
 								1='Less than 6 months'
 								2='6-12 months'
 								3='1-3 years'
 								4='4-6 years'
 								5='7 years and above';
-		VALUE 	noyes 
+		VALUE 	noyes
 								0='No'
 								1='Yes';
-		VALUE 	nonotsureyes 
+		VALUE 	nonotsureyes
 								0='No'
 								1='Not Sure'
 								2='Yes';
-		VALUE 	edufour			
+		VALUE 	edufour
 								0='No education'
 								1='Primary'
 								2='Lower secondary'
@@ -402,33 +401,33 @@ PROC FORMAT;
 								0='Primary or lower'
 								1='Lower secondary'
 								2='Upper secondary';
-		VALUE 	sex 
+		VALUE 	sex
 								0='Male'
 								1='Female';
-		VALUE 	sexfive				
+		VALUE 	sexfive
 								1='Male Youth'
 								2='Female Youth'
 								3='Male Adult'
 								4='Female Adult'
 								5='MSM Trans';
 
-		VALUE 	prevention_knowledge 
+		VALUE 	prevention_knowledge
 								0='Not Aware of more than 1 method'
 								1='Knows 2 or more prevention methods';
-		VALUE 	nosometimesyes				
+		VALUE 	nosometimesyes
 								0='No'
 								1='Sometimes'
 								2='Yes';
-		VALUE 	partnerhivstatus 
+		VALUE 	partnerhivstatus
 								0='No'
 								1='Not All of Them'
 								2='Yes';
-		VALUE 	perceivedHIVrisk	
+		VALUE 	perceivedHIVrisk
 								1='Not Worried'
 								2='Not Sure'
 								3='Worried a Little'
 								4='Worried a Lot';
-		VALUE	prefferedproduct	
+		VALUE	prefferedproduct
 								1='Ring'
 								2='Gel'
 								3='Oral PrEP'
@@ -441,7 +440,7 @@ PROC FORMAT;
 								5='Comfortable'
 								6='Long Dosing Regiment'
 								7='Unlikely to Forget';
-		VALUE 	microgel	
+		VALUE 	microgel
 								1='Whether it Works'
 								2='Whether its Safe'
 								3='Where to find it'
@@ -512,7 +511,7 @@ PROC FORMAT;
 	run;
 
 
-	
+
 *********************************************************************************************************************
 	~~~Bining of multi-level demographics~~~
 
@@ -524,13 +523,13 @@ PROC FORMAT;
 
 		This is neccessary because in the codebook for the survey, missing is entered as '88' most commonly
 
-		however there are several cases where 		'99' is used as missing, 
-		or where rather than having the three level 	 77='other' 88='missing' 99='don't know/not sure' 
-		there is just one value such as			 88='missing/other/don't know 
-		or there isn't a code for missing at all.... 
+		however there are several cases where 		'99' is used as missing,
+		or where rather than having the three level 	 77='other' 88='missing' 99='don't know/not sure'
+		there is just one value such as			 88='missing/other/don't know
+		or there isn't a code for missing at all....
 
 		Frequencies were ran for each question and with consideration of the sample
-		size, coding per the survey guide, and what the proportions indicated, educated guesses were made for 
+		size, coding per the survey guide, and what the proportions indicated, educated guesses were made for
 		what represented missing data for each question, or if 'don't know/not sure' was an important response
 		to be kept depending on the nature of the question, and if it would logically fit somewhere on a spectrum
 		of understanding with ordinal style questions such as level of worry regarding HIV infection
@@ -538,8 +537,8 @@ PROC FORMAT;
 
 *********************************************************************************************************************;
 
-DATA TUPP	(drop= 	PUP28d77 PUP28d88 PUP28c88 
-					PUP28c77 PUP28b77 PUP28b88 
+DATA TUPP	(drop= 	PUP28d77 PUP28d88 PUP28c88
+					PUP28c77 PUP28b77 PUP28b88
 					PUP28a77 PUP28a88 dem2		);
 SET TUPP;
 
@@ -559,7 +558,7 @@ SET TUPP;
 
 		********************************************
 		if just one or 0 ways to protect were checked,
-		they were not knowledgable of methods of 
+		they were not knowledgable of methods of
 		prevention
 		*********************************************;
 		prevention_score = 0;
@@ -596,7 +595,7 @@ SET TUPP;
 			incomesource=4;
 			end;
 	***********************************************************************General Knowledge of HIV;
-		
+
 		if GKH9j=77 then do;
 			GKHn10=1;
 			end;
@@ -631,8 +630,8 @@ SET TUPP;
 			else if HRB16 = 2 then do;
 				HRB16=1;
 				end;
-			
-		if HRB17 = 88 then do;		
+
+		if HRB17 = 88 then do;
 			HRB17=.;
 			end;
 
@@ -646,22 +645,22 @@ SET TUPP;
 
 
 	**************************************************************
-	just 99 here, which is don't know/not sure... 
-	So does this mean everyone answered this question? 
+	just 99 here, which is don't know/not sure...
+	So does this mean everyone answered this question?
 	no option for no response
 
-	23 missing moved to a neutral category of perceived risk!!!! 
+	23 missing moved to a neutral category of perceived risk!!!!
 	made a small assumption that everyone was asked this question
 	***************************************************************;
-	if PHR19=2 then do;		
-		PHR19=3; 
+	if PHR19=2 then do;
+		PHR19=3;
 		end;
 
-		else if PHR19=3 then do;	
-			PHR19=4; 
+		else if PHR19=3 then do;
+			PHR19=4;
 			end;
-		else if PHR19=99 then do;		
-			PHR19=2; 
+		else if PHR19=99 then do;
+			PHR19=2;
 			end;
 
 	if PHR20g=77 then do;
@@ -736,12 +735,12 @@ SET TUPP;
 
 run;
 
-DATA TUPP 
+DATA TUPP
 		(keep = var1--var133 dem1--dem10 education employed language10
-				myth_score prevention_knowledge prevention_score 
+				myth_score prevention_knowledge prevention_score
 				cure_knowledge cure_knowledgeYN INTTIME INTEND INTSTAFF		);
 SET TUPP;
-		
+
 		dem1	=	sex;
 		dem2	=	age;
 		dem3	=	language2;
@@ -762,7 +761,7 @@ SET TUPP;
 		var7 	= 	GKH9f;
 		var8 	= 	GKH9g;
 		var9 	= 	GKH9h;
-		var10 	= 	GKH9i;	
+		var10 	= 	GKH9i;
 		var11	= 	GKH9j;
 		var12 	= 	GKH10;
 		var13 	= 	GKH11;
@@ -822,35 +821,35 @@ SET TUPP;
 
 		var58 	= 	PUP28a1;
 		var59 	= 	PUP28a2;
-		var60 	= 	PUP28a3;	
+		var60 	= 	PUP28a3;
 		var61 	= 	PUP28a4;
 		var62 	= 	PUP28a5;
 		var63 	= 	PUP28a6;
-		var64 	= 	PUP28a7;	
+		var64 	= 	PUP28a7;
 
-		var65 	= 	PUP28b1;	
-		var66 	= 	PUP28b2;	
-		var67 	= 	PUP28b3;	
-		var68 	= 	PUP28b4;	
-		var69 	= 	PUP28b5;	
+		var65 	= 	PUP28b1;
+		var66 	= 	PUP28b2;
+		var67 	= 	PUP28b3;
+		var68 	= 	PUP28b4;
+		var69 	= 	PUP28b5;
 		var70 	= 	PUP28b6;
-		var71 	= 	PUP28b7;	
+		var71 	= 	PUP28b7;
 
-		var72 	= 	PUP28c1;	
-		var73 	= 	PUP28c2;	
-		var74 	= 	PUP28c3;	
-		var75 	= 	PUP28c4;	
-		var76 	= 	PUP28c5;	
-		var77 	= 	PUP28c6;	
-		var78 	= 	PUP28c7;	
+		var72 	= 	PUP28c1;
+		var73 	= 	PUP28c2;
+		var74 	= 	PUP28c3;
+		var75 	= 	PUP28c4;
+		var76 	= 	PUP28c5;
+		var77 	= 	PUP28c6;
+		var78 	= 	PUP28c7;
 
-		var79 	= 	PUP28d1;	
-		var80 	= 	PUP28d2;	
-		var81 	= 	PUP28d3;	
-		var82 	= 	PUP28d4;	
+		var79 	= 	PUP28d1;
+		var80 	= 	PUP28d2;
+		var81 	= 	PUP28d3;
+		var82 	= 	PUP28d4;
 		var83 	= 	PUP28d5;
-		var84 	= 	PUP28d6;	
-		var85 	= 	PUP28d7;	
+		var84 	= 	PUP28d6;
+		var85 	= 	PUP28d7;
 
 		var86 	= 	PUP29;
 		var87 	= 	PUP30;
@@ -883,32 +882,32 @@ SET TUPP;
 		var105 = 	AAF39b;
 		var106 = 	AAF39c;
 		var107 = 	AAF39d;
-		var108 = 	AAF39e;	
-		var109 = 	AAF39f;	
-		var110 = 	AAF39g;	
-	 
-		var111 = 	AAF40a;	 
-		var112 = 	AAF40b;	
+		var108 = 	AAF39e;
+		var109 = 	AAF39f;
+		var110 = 	AAF39g;
+
+		var111 = 	AAF40a;
+		var112 = 	AAF40b;
 		var113 = 	AAF40c;
-		var114 = 	AAF40d;	
+		var114 = 	AAF40d;
 		var115 = 	AAF40e;
 		var116 = 	AAF40f;
 
-		var117 = 	AAF41;	
+		var117 = 	AAF41;
 
 		var118 = 	AAF42a;
 		var119 = 	AAF42b;
-		var120 = 	AAF42c;	
-		var121 = 	AAF42d;	
+		var120 = 	AAF42c;
+		var121 = 	AAF42d;
 		var122 = 	AAF42e;
 		var123 = 	AAF42f;
 		var124 = 	AAF42g;
-		var125 = 	AAF42h;	
+		var125 = 	AAF42h;
 
-		var126 = 	AAF43; 
+		var126 = 	AAF43;
 
-		var127 = 	AAF44a;	
-		var128 = 	AAF44b;	 
+		var127 = 	AAF44a;
+		var128 = 	AAF44b;
 		var129 = 	AAF44c;
 		var130 = 	AAF44d;
 		var131 = 	AAF44e;
@@ -1031,12 +1030,12 @@ SET TUPP;
 		var107		= 'partner support'
 		var108 		= 'missing'
 		var109 		= 'dont know, not sure'
-		var110 		= 'other' 
-		var111 		= 'being judged about having sex' 
+		var110 		= 'other'
+		var111 		= 'being judged about having sex'
 		var112 		= 'being seen as having HIV'
-		var113 		= 'forgetting' 
+		var113 		= 'forgetting'
 		var114 		= 'no support'
-		var115 		= 'lack of information' 
+		var115 		= 'lack of information'
 		var116 		= 'other'
 		var117 		= 'preffer site of obtainment'
 		var118 		= 'free'
@@ -1047,15 +1046,15 @@ SET TUPP;
 		var123 		= 'anonymity'
 		var124 		= 'special skills'
 		var125 		= 'other'
-		var126 		= 'venue not preffered' 
+		var126 		= 'venue not preffered'
 		var127 		= 'judgmental'
-		var128 		= 'being seen as having HIV' 
+		var128 		= 'being seen as having HIV'
 		var129 		= 'Long hours/ques'
 		var130 		= 'rude personnel'
 		var131 		= 'not free'
 		var132 		= 'no privacy'
 		var133 		= 'other'
-		
+
 		dem1 		= 'Sex'
 		dem2 		= 'Age'
 		dem3 		= 'Language 2'
@@ -1072,7 +1071,7 @@ SET TUPP;
 		cure_knowledgeYN 			= 'Aware there is not a cure for AIDS';
 
 		IF dem10 in(2,.) THEN DELETE;
-		
+
 		FORMAT 		dem1	sex.
 					dem3	languagetwo.
 					dem4 	edufour.
@@ -1153,7 +1152,7 @@ RUN;
 
 
 
-	
+
 ***********************************************************FREQS ARRAY****************************************************;
 
 	%MACRO freq(demnum,varnum);
@@ -1168,11 +1167,11 @@ RUN;
 
 **Allows for the specification of a specific range of variable numbers,
 all of which will be cross tabbed against all demographic variables...
-if new demographic variables are added and exceed 10 then edit the dimensions 
+if new demographic variables are added and exceed 10 then edit the dimensions
 within this macro;
 
 	%MACRO allfreq(dataset,dim2min, dim2max);
-			
+
 			DATA &dataset;
 			SET  &dataset;
 			%let varrange =	%sysevalf((&dim2max-&dim2min)+1);
@@ -1181,9 +1180,9 @@ within this macro;
 			ARRAY var[&varrange] var&dim2min--var&dim2max;
 
 			%do j=1 %to 4;
-			
+
 				%do i = &dim2min %to &dim2max;
-			
+
 					%freq(&j,&i);
 				%end;
 			%end;
@@ -1264,7 +1263,7 @@ run;
 data tupp;
 set  tupp;
 
-if 	sexuality = . then delete; 
+if 	sexuality = . then delete;
 	if sex = . then delete;
 	if dem3= . then delete;
 	if dem4= . then delete;
@@ -1299,7 +1298,7 @@ proc logistic data=tupp;
 
 	class   venue		(ref="clinic")
 			sexuality 	(ref="heterosexual")
-			sex  		(ref="Male")  
+			sex  		(ref="Male")
 			dem3 		(ref="Xhosa")
 			edu3 		(ref="Primary or lower")
 			dem5 		(ref="No")
@@ -1309,7 +1308,7 @@ proc logistic data=tupp;
 	/ param=ref;
 
 	model 	venue =  sexuality sex dem2 dem3 edu3 dem5 dem6 dem10
-	/ 
+	/
 	link=glogit
 	expb
 	RSQUARE;
@@ -1324,7 +1323,7 @@ proc logistic data=tupp;
 
 	class   var86		(ref="Oral PrEP")
 			sexuality 	(ref="heterosexual")
-			sex  		(ref="Male")  
+			sex  		(ref="Male")
 			dem3 		(ref="Xhosa")
 			edu3 		(ref="Primary or lower")
 			dem5 		(ref="No")
@@ -1334,7 +1333,7 @@ proc logistic data=tupp;
 	/ param=ref;
 
 	model 	var86 =  sexuality sex dem2 dem3 edu3 dem5 dem6 dem10
-	/ 
+	/
 	link=glogit
 	expb
 	RSQUARE;
