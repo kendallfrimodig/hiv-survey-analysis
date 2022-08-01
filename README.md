@@ -8,7 +8,7 @@ University of Cape Town, South Africa
 <br>
 
 <p style="line-height:2">
-The primary objective of South Africa’s National Strategic Plan for 2012-2016 was to improve the accessibility and coverage for HIV testing and treatment. As a result of HIV testing and counselling (HTC) campaign of 2010 and its revitalization strategy in 2013 which focused upon the inclusion of a diverse range of populations in these services, 86% of South African citizens are now aware of their HIV status. This awareness of HIV status has also likely contributed to the marked reductions in mother-to-child transmission, which dropped from 3.6% in 2011 to 1.5% in 2016 (SANAC, 2016). Overall, incident cases of HIV decreased from 367,946 to 266,618 in the same time. Despite a 27.5% reduction in new HIV infections this figure falls significantly short of the 2012-2016 NSP goal of 50%. In response to this shortcoming, a revision of HIV reduction strategies has occurred within both the scientific community and South African government and municipalities. 
+The primary objective of South Africa’s National Strategic Plan for 2012-2016 was to improve the accessibility and coverage for HIV testing and treatment. As a result of HIV testing and counselling (HTC) campaign of 2010 and its revitalization strategy in 2013 which focused upon the inclusion of a diverse range of populations in these services, 86% of South African citizens are now aware of their HIV status. This awareness of HIV status has also likely contributed to the marked reductions in mother-to-child transmission, which dropped from 3.6% in 2011 to 1.5% in 2016 (SANAC, 2016). Overall, incident cases of HIV decreased from 367,946 to 266,618 in the same time. Despite a 27.5% reduction in new HIV infections this figure falls significantly short of the 2012-2016 NSP goal of 50%. In response to this shortcoming, a revision of HIV reduction strategies has occurred within both the scientific community and South African government and municipalities.
 </p>
 
 <p style="line-height:2">
@@ -24,7 +24,7 @@ In addition to historically overlooking high risk populations such as MSM and se
 </p>
 
 <p style="line-height:2">
-The present study titled Target User Product Preferences (TUPP) is a mixed methods analysis which aims to better understand general comprehension of HIV and preventative measures, the degree to which this knowledge is translated into sexual behaviors, and the factors promoting or discouraging the use and access of prevention medicines and products such as Oral PrEP, Microbicide gel, and vaccines. These products are an integral component of the 2017-2022 national strategic plan for South Africa, and the efficacy of Oral PrEP in a controlled environment has been proven in several clinical trials, while a great deal of hope rests in the feasibility of vaccine uptake and its efficacy (cite clinical trials)
+The present study titled Target User Product Preferences (TUPP) is a mixed methods analysis which aims to better understand general comprehension of HIV and preventative measures, the degree to which this knowledge is translated into sexual behaviors, and the factors promoting or discouraging the use and access of prevention medicines and products such as Oral PrEP, Microbicide gel, and vaccines. These products are an integral component of the 2017-2022 national strategic plan for South Africa, and the efficacy of Oral PrEP in a controlled environment has been proven in several clinical trials, while a great deal of hope rests in the feasibility of vaccine uptake and its efficacy.
 </p>
 
 <p style="line-height:2">
@@ -42,7 +42,7 @@ A multinomial, nominal logistic regression was used to understand how preferred 
 </p>
 
 <p style="line-height:2">
-With regards to the study population as a whole, response levels for taverns (), grocery stores(), and clubs were quite low although preferences among the MSM community surveyed for a MSM sensitized clinic were quite high (). Additionally, MSM preferred other alternate locations to a higher degree than the rest of the study population.
+With regards to the study population as a whole, response levels for taverns, grocery stores, and clubs were quite low although preferences among the MSM community surveyed for a MSM sensitized clinic were quite high. Additionally, MSM preferred other alternate locations to a higher degree than the rest of the study population.
 
 </p>
 
