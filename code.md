@@ -1,4 +1,4 @@
----
+necessary---
 title: "Survey Analysis of HIV Medication Preference Data Set"
 author: "Kendall Frimodig"
 output: github_document
@@ -24,39 +24,39 @@ string to numeric conversions, age calculations
 	%import;
 	DATA TUPP
 			(drop= 	INTTIME
-					PIDtemp
-					PID
-					INTEND
+							PIDtemp
+							PID
+							INTEND
 
-		 rename=(	DEM1=	sex
-					DEM3=	language10
-					DEM4=	education
-					DEM5=	employed
-					DEM6=	incomesource
-					DEM7=	residence_length
-					VAR56=	KPS25a
-					GKH9=	GKH9a
-					GKH9a=	GKH9b
-					GKH9b=	GKH9c
-					GKH9c=	GKH9d
-					GKH9d=	GKH9e
-					GKH9e=	GKH9f
-					GKH9f=	GKH9g
-					GKH9g=	GKH9h
-					GKH9h=	GKH9i
-					GKH9i=	GKH9j));
+		 rename=(	DEM1=		sex
+							DEM3=		language10
+							DEM4=		education
+							DEM5=		employed
+							DEM6=		incomesource
+							DEM7=		residence_length
+							VAR56=	KPS25a
+							GKH9=		GKH9a
+							GKH9a=	GKH9b
+							GKH9b=	GKH9c
+							GKH9c=	GKH9d
+							GKH9d=	GKH9e
+							GKH9e=	GKH9f
+							GKH9f=	GKH9g
+							GKH9g=	GKH9h
+							GKH9h=	GKH9i
+							GKH9i=	GKH9j));
 
-				SET TUPP;
+		SET TUPP;
 
 		birthdate		= PUT(dem2,8.);
 		interviewdate	= COMPRESS(PUT(intdate,8.),' ');
 		PIDfull			= COMPRESS(PID,,'a');
 		inttime2		= COMPRESS(inttime,,'a');
 		intend2			= COMPRESS(intend,,'a');
-		Group_IDC 		= SUBSTR(PIDfull,1,1);
-		Naive_IDC 		= SUBSTR(PIDfull,3,1);
+		Group_IDC 	= SUBSTR(PIDfull,1,1);
+		Naive_IDC 	= SUBSTR(PIDfull,3,1);
 		PIDtemp			= SUBSTR(PIDfull,4,3);
-		PIDc			= COMPRESS((Group_IDC || PIDtemp),'');
+		PIDc				= COMPRESS((Group_IDC || PIDtemp),'');
 
 		if dem2 =. then delete;
 
@@ -84,7 +84,6 @@ string to numeric conversions, age calculations
 				byear	= ' ';
 				end;
 
-
 		if intdate < 10000000 then do;
 			intday	 = SUBSTR(interviewdate,1,1);
 			intmonth = SUBSTR(interviewdate,2,2);
@@ -97,32 +96,31 @@ string to numeric conversions, age calculations
 			intyear  = SUBSTR(interviewdate,5,4);
 			end;
 
-
-
 		if ID >= 652 and ID <= 661 then delete;
+
 	run;
 
 
 	DATA TUPP
 		(drop= 	PIDfull bday byear bmonth  PIDc GROUP_IDC NAIVE_IDC
 				INTTIME2 INTEND2 interviewdate birthdate dem2
-				intdate ID intday intmonth intyear					);
+				intdate ID intday intmonth intyear);
 	SET TUPP;
 
-		PID 		= INPUT(PIDc,4.);
+		PID 			= INPUT(PIDc,4.);
 		GROUP 		= INPUT(Group_IDC,1.);
 		NAIVE 		= INPUT(Naive_IDC,1.);
 
 		INTTIME		= INPUT(INTTIME2,4.);
 		INTEND 		= INPUT(INTEND2,4.);
 
-		birthday 	= INPUT(bday,2.);
+		birthday 		= INPUT(bday,2.);
 		birthmonth	= INPUT(bmonth,2.);
-		birthyear	= INPUT(byear,4.);
+		birthyear		= INPUT(byear,4.);
 
-		interviewday	= INPUT(intday,2.);
+		interviewday		= INPUT(intday,2.);
 		interviewmonth	= INPUT(intmonth,2.);
-		interviewyear	= INPUT(intyear,4.);
+		interviewyear		= INPUT(intyear,4.);
 
 		if interviewyear = . then do;
 			interviewyear = 2015;
@@ -134,7 +132,7 @@ string to numeric conversions, age calculations
 			interviewmonth = 9;
 			end;
 
-		if interviewmonth = 15	 then do;
+		if interviewmonth = 15 then do;
 			interviewmonth = 5;
 			 end;
 
@@ -265,24 +263,24 @@ do the GKH8= 'heard of aids'and then having to repeat all that code in the subse
 				PUP28d7	= 'do not like them'
 				PUP28d88= 'not sure/dont know'
 				PUP28d77= 'other'
-				PUP29	= 'prefered product'
-				PUP30	= 'reason for preffered product'
+				PUP29		= 'prefered product'
+				PUP30		= 'reason for preffered product'
 				IPU31a	= '1st information for microbiocide use'
 				IPU31b	= '2nd information for microbiocide use'
 				IPU31c	= '3rd information for microbiocide use'
-				IPU32	= 'would use if 50% effective?'
+				IPU32		= 'would use if 50% effective?'
 				IPU33a	= '1st microbiocide ring'
 				IPU33b	= '2nd microbiocide ring'
 				IPU33c	= '3rd microbiocide ring'
-				IPU34	= 'would use ring if 50% effective?'
+				IPU34		= 'would use ring if 50% effective?'
 				IPU35a	= '1st oral PREP'
 				IPU35b	= '2nd oral PREP'
 				IPU35c	= '3rd oral PREP'
-				IPU36	= 'would use oral prep if 50% effective'
+				IPU36		= 'would use oral prep if 50% effective'
 				IPU37a	= '1st vaccine'
 				IPU37b	= '2nd vaccine'
 				IPU37c	= '3rd vaccine'
-				IPU38	= 'would use vaccine if 50% effective'
+				IPU38		= 'would use vaccine if 50% effective'
 				AAF39a	= 'easy access'
 				AAF39b	= 'friend support'
 				AAF39c	= 'family support'
@@ -296,7 +294,7 @@ do the GKH8= 'heard of aids'and then having to repeat all that code in the subse
 				AAF40d	= 'no support'
 				AAF40e	= 'lack of information'
 				AAF40f	= 'other'
-				AAF41	= 'preffer site of obtainment'
+				AAF41		= 'preffer site of obtainment'
 				AAF42a	= 'free'
 				AAF42b	= 'acessible'
 				AAF42c	= 'non-judgmental'
@@ -305,7 +303,7 @@ do the GKH8= 'heard of aids'and then having to repeat all that code in the subse
 				AAF42f	= 'anonymity'
 				AAF42g	= 'special skills'
 				AAF42h	= 'other'
-				AAF43	= 'venue not preffered'
+				AAF43		= 'venue not preffered'
 				AAF44a	= 'judgmental'
 				AAF44b	= 'being seen as having HIV'
 				AAF44c	= 'Long hours/ques'
@@ -351,15 +349,16 @@ do the GKH8= 'heard of aids'and then having to repeat all that code in the subse
 		run;
 
 
-*********************************************************************************************************************
+*****************************************************************************
 FORMATS
-*********************************************************************************************************************
+*****************************************************************************
 	PROC FORMAT;
 
 			VALUE 	group
 									1='Adolescents'
 									2='Adults'
 									3='MSM';
+
 			VALUE 	languagetwo
 									0='Other'
 									1='Xhosa';
@@ -378,38 +377,46 @@ FORMATS
 									11='English'
 									12='Other';
 
-			VALUE 	income  	 	1='No income'
+			VALUE 	income  	 	
+									1='No income'
 									2='Salaries or wages'
 									3='Assistance from relatives'
 									4='Pensions and grants'
 									77='Other'
 									88='Missing';
+
 			VALUE 	residence_length
 									1='Less than 6 months'
 									2='6-12 months'
 									3='1-3 years'
 									4='4-6 years'
 									5='7 years and above';
+
 			VALUE 	noyes
 									0='No'
 									1='Yes';
+
 			VALUE 	nonotsureyes
 									0='No'
 									1='Not Sure'
 									2='Yes';
+
 			VALUE 	edufour
 									0='No education'
 									1='Primary'
 									2='Lower secondary'
 									3='Upper secondary'
 									4='Tertiary';
+
 			value 	eduthree
 									0='Primary or lower'
 									1='Lower secondary'
 									2='Upper secondary';
+
 			VALUE 	sex
 									0='Male'
 									1='Female';
+
 			VALUE 	sexfive
 									1='Male Youth'
 									2='Female Youth'
@@ -420,24 +427,29 @@ FORMATS
 			VALUE 	prevention_knowledge
 									0='Not Aware of more than 1 method'
 									1='Knows 2 or more prevention methods';
+
 			VALUE 	nosometimesyes
 									0='No'
 									1='Sometimes'
 									2='Yes';
+
 			VALUE 	partnerhivstatus
 									0='No'
 									1='Not All of Them'
 									2='Yes';
+
 			VALUE 	perceivedHIVrisk
 									1='Not Worried'
 									2='Not Sure'
 									3='Worried a Little'
 									4='Worried a Lot';
+
 			VALUE	prefferedproduct
 									1='Ring'
 									2='Gel'
 									3='Oral PrEP'
 									4='Vaccine';
+
 			VALUE	reasonpreffered
 									1='Efficacy level'
 									2='Saftey/Side Effects'
@@ -446,6 +458,7 @@ FORMATS
 									5='Comfortable'
 									6='Long Dosing Regiment'
 									7='Unlikely to Forget';
+
 			VALUE 	microgel
 									1='Whether it Works'
 									2='Whether its Safe'
@@ -453,6 +466,7 @@ FORMATS
 									4='Whether I have to pay'
 									5='Whether it will slip out'
 									6='When to use it';
+
 			VALUE 	microring
 									1='How to insert it'
 									2='Whether it works'
@@ -462,12 +476,14 @@ FORMATS
 									6='Whether it will slip out'
 									7='Whether it is comfortable'
 									8='When to use it';
+
 			VALUE	oralprep
 									1='Whether its safe'
 									2='Whether it works'
 									3='Where to find it'
 									4='Any out of pocket cost'
 									5='When to use it';
+
 			VALUE 	vaccine
 									1='Whether its safe'
 									2='Whether it works'
@@ -475,6 +491,7 @@ FORMATS
 									4='Where to find it'
 									5='Any out of pocket cost'
 									6='When to use it';
+
 			VALUE 	prefferedvenue
 									1='Clinic'
 									2='Pharmacy'
@@ -492,6 +509,7 @@ FORMATS
 									3='private doctor'
 									4='hospital'
 									5='other';
+
 			VALUE	notprefferedvenue
 									1='Clinic'
 									2='Pharmacy'
@@ -501,31 +519,31 @@ FORMATS
 									6='Grocery Store'
 									7='Tavern'
 									8='Night Club';
+
 			VALUE study
 									1='Vaccine'
 									2='Oral PrEP'
 									3='Microbicide Gel'
 									4='Microbicide Ring';
+
 			value sexuality
 									0='heterosexual'
 									1='homosexual';
+
 			value experienced
 									0='Naiive'
 									1='Non-Naiive';
-
-
 		run;
 
 
-
-*********************************************************************************************************************
-## Bining of multi-level demographics
+************************************************************************************************
+### Binning of multi-level demographics
 
 10 group language made into 2 categories 'xhosa' or 'other' due to most of the sample speaking 'xhosa'
 Education collapsed from grade by grade basis to 4 level
 **UPDATE** might want to change this to 2 level as theres very few no or lower primary
 
-## Question by question basis of determining what is incorrectly entered data or "missing"
+### Question by question basis of determining what is incorrectly entered data or "missing"
 
 This is neccessary because in the codebook for the survey, missing is entered as '88' most commonly
 
@@ -545,19 +563,19 @@ of understanding with ordinal style questions such as level of worry regarding H
 
 	DATA TUPP	(drop= 	PUP28d77 PUP28d88 PUP28c88
 						PUP28c77 PUP28b77 PUP28b88
-						PUP28a77 PUP28a88 dem2		);
+						PUP28a77 PUP28a88 dem2);
 	SET TUPP;
 
 			age=dem2;
 
-			if education in(1,88) 			 		then edu4 = 0;
-				else if education in(7,8,9)	 		then edu4 = 1;
+			if education in(1,88) 			 					then edu4 = 0;
+				else if education in(7,8,9)	 				then edu4 = 1;
 				else if education in(10,11,12,13) 	then edu4 = 2;
-				else if education = 14 		 		then edu4 = 3;
+				else if education = 14 		 					then edu4 = 3;
 				else edu4=.;
 
-			if language10 = 1 				then language2 = 1;
-											else language2 = 0;
+			if language10 = 1 then language2 = 1;
+			else language2 = 0;
 
 			if employed in(0,88) 				then employed_YN = 0;
 				else if employed = 1 			then employed_YN = 1;
@@ -589,10 +607,12 @@ of understanding with ordinal style questions such as level of worry regarding H
 			IF GKH10 = 0 THEN cure_knowledgeYN=1;
 				else if GKH10 in(1,99) then cure_knowledgeYN=0;
 				else cure_knowledgeYN = .;
+
 			IF GKH10 = 0 THEN cure_knowledge=2;
 				else if GKH10 =99 then cure_knowledge=1;
 				else if GKH10 = 1 then cure_knowledge = 0;
 				else cure_knowledge=.;
+
 			IF GKH11 =99 THEN DO;
 				GKH11=0;
 				end;
@@ -1118,9 +1138,9 @@ of understanding with ordinal style questions such as level of worry regarding H
 						var117	prefferedvenue.
 						var126	notprefferedvenue.
 
-						language10				languageten.
-						intdate					DDMMYY.
-						prevention_knowledge 	noyes.
+						language10					languageten.
+						intdate							DDMMYY.
+						prevention_knowledge noyes.
 						cure_knowlegeYN 		noyes.;
 
 	run;
@@ -1248,9 +1268,10 @@ within this macro;
 
 
 	format 		study 		study.
-				sex 		sex.
-				sexuality 	sexuality.
-				dem10 		experienced.;
+						sex 			sex.
+						sexuality sexuality.
+						dem10 		experienced.;
+
 	label	  	study = 'Type of Study Experienced in';
 
 	run;
@@ -1304,12 +1325,12 @@ within this macro;
 
 		class   venue		(ref="clinic")
 				sexuality 	(ref="heterosexual")
-				sex  		(ref="Male")
-				dem3 		(ref="Xhosa")
-				edu3 		(ref="Primary or lower")
-				dem5 		(ref="No")
-				dem6 		(ref="No income")
-				dem10 		(ref="Naiive")
+				sex  				(ref="Male")
+				dem3 				(ref="Xhosa")
+				edu3 				(ref="Primary or lower")
+				dem5 				(ref="No")
+				dem6 				(ref="No income")
+				dem10 			(ref="Naiive")
 
 		/ param=ref;
 
@@ -1329,12 +1350,12 @@ within this macro;
 
 		class   var86		(ref="Oral PrEP")
 				sexuality 	(ref="heterosexual")
-				sex  		(ref="Male")
-				dem3 		(ref="Xhosa")
-				edu3 		(ref="Primary or lower")
-				dem5 		(ref="No")
-				dem6 		(ref="No income")
-				dem10 		(ref="Naiive")
+				sex  				(ref="Male")
+				dem3 				(ref="Xhosa")
+				edu3 				(ref="Primary or lower")
+				dem5 				(ref="No")
+				dem6 				(ref="No income")
+				dem10 			(ref="Naiive")
 
 		/ param=ref;
 
